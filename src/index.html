@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator by JRM</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="/assets/favicon.ico" />
+    <script type="module" src="/src/js/app.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">Password Generator</h1>
+      <hr />
+      <div class="password-section">
+        <small>PASSWORD</small>
+        <input id="generated-pass" type="text" value="" disabled />
+        <button id="copy-btn">Copy</button>
+      </div>
+      <div class="password-length">
+        <label for="length-range">Length: </label>
+        <input
+          id="length-range"
+          name="length"
+          type="range"
+          min="8"
+          max="24"
+          step="2" />
+        <p id="length-range-value">8</p>
+      </div>
+      <hr />
+      <small>Include:</small>
+      <div class="checkbox">
+        <input type="checkbox" id="lowercase" name="lowercase" checked />
+        <label for="lowercase">lowercase (a-z)</label><br />
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" id="uppercase" name="uppercase" />
+        <label for="uppercase">UPPERCASE (A-Z)</label><br />
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" id="numbers" name="numbers" />
+        <label for="numbers">Numbers (0-9)</label><br />
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" id="symbols" name="symbols" />
+        <label for="symbols">Symbols (e.g., $ % ^ & * etc.)</label><br />
+      </div>
+    </div>
+  </body>
+</html>
