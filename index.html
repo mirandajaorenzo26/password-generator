@@ -7,7 +7,6 @@
     <title>Password Generator by JRM</title>
     <link rel="stylesheet" href="./src/css/style.css" />
     <link rel="icon" type="image/png" href="/assets/favicon.ico" />
-    <script type="module" src="./src/js/app.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -20,14 +19,8 @@
       </div>
       <div class="password-length">
         <label for="length-range">Length: </label>
-        <input
-          id="length-range"
-          name="length"
-          type="range"
-          min="8"
-          max="24"
-          step="2" />
-        <p id="length-range-value">8</p>
+        <input id="length-range" name="length" type="range" min="6" max="24" />
+        <p id="length-range-value">0</p>
       </div>
       <hr />
       <small>Include:</small>
@@ -48,5 +41,6 @@
         <label for="symbols">Symbols (e.g., $ % ^ & * etc.)</label><br />
       </div>
     </div>
+    <script type="module" src="./src/js/app.js"></script>
   </body>
 </html>

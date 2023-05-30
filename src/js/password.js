@@ -1,5 +1,5 @@
 export class Password {
-  constructor(length, { noDuplicate, hasNum, hasLower, hasUpper, hasSymbol }) {
+  constructor(length, { hasNum, hasLower, hasUpper, hasSymbol }) {
     this.length = length;
     this.hasNum = hasNum;
     this.hasLower = hasLower;
@@ -7,100 +7,46 @@ export class Password {
     this.hasSymbol = hasSymbol;
   }
 
-  numString = '0123456789';
-  lowerCaseString = 'abcdefghijklmnopqrstuvwxyz';
-  upperCaseString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  symbolString = '!@#$%^&*()_-+=[]{}|;\':",.<>?/</>';
+  numString = "0123456789";
+  lowerCaseString = "abcdefghijklmnopqrstuvwxyz";
+  upperCaseString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  symbolString = "!@#$%^&*()_-+=[]{}|;':\",.<>?/</>";
 
   generatePassword() {
-    let password = '';
-    const numOfCharPerCategory = this.calculateNumberOfChar(this.length);
-    let nums = '',
-      lowerCaseLetters = '',
-      upperCaseLetters = '',
-      symbols = '';
-
-    if (this.hasNum) {
-      nums = this.generateNumbers(numOfCharPerCategory);
-      password += nums;
-    }
-    if (this.hasLower) {
-      lowerCaseLetters = this.generateLowerCase(numOfCharPerCategory);
-      password += lowerCaseLetters;
-    }
-    if (this.hasUpper) {
-      upperCaseLetters = this.generateUpperCase(numOfCharPerCategory);
-      password += upperCaseLetters;
-    }
-    if (this.hasSymbol) {
-      symbols = this.generateSymbols(numOfCharPerCategory);
-      password += symbols;
-    }
-
-    return this.shufflePassword(password);
-  }
-
-  calculateNumberOfChar(length) {
-    const passwordStructure = [
-      this.hasNum,
-      this.hasLower,
-      this.hasUpper,
-      this.hasSymbol,
-    ];
-    const activePasswordStructure = passwordStructure.filter(
-      (value) => value === true
-    ).length;
-    return this.length / activePasswordStructure;
-  }
-
-  generateNumbers(length) {
-    const numbers = [];
-    for (let i = 0; i < length; i++) {
-      numbers.push(
-        this.numString[Math.floor(Math.random() * this.numString.length)]
-      );
-    }
-    return numbers.join('');
-  }
-
-  generateLowerCase(length) {
-    const lowerCase = [];
-    for (let i = 0; i < length; i++) {
-      lowerCase.push(
-        this.lowerCaseString[
-          Math.floor(Math.random() * this.lowerCaseString.length)
-        ]
-      );
-    }
-    return lowerCase.join('');
-  }
-
-  generateUpperCase(length) {
-    const upperCase = [];
-    for (let i = 0; i < length; i++) {
-      upperCase.push(
-        this.upperCaseString[
-          Math.floor(Math.random() * this.upperCaseString.length)
-        ]
-      );
-    }
-    return upperCase.join('');
-  }
-
-  generateSymbols(length) {
-    const symbols = [];
-    for (let i = 0; i < length; i++) {
-      symbols.push(
-        this.symbolString[Math.floor(Math.random() * this.symbolString.length)]
-      );
-    }
-    return symbols.join('');
+    let password = [];
+    if (this.hasNum || this.hasLower || this.hasUpper || this.hasSymbol)
+      while (password.length < this.length) {
+        if (this.hasNum && password.length < this.length)
+          password.push(
+            this.numString[Math.floor(Math.random() * this.numString.length)]
+          );
+        if (this.hasLower && password.length < this.length)
+          password.push(
+            this.lowerCaseString[
+              Math.floor(Math.random() * this.lowerCaseString.length)
+            ]
+          );
+        if (this.hasUpper && password.length < this.length)
+          password.push(
+            this.upperCaseString[
+              Math.floor(Math.random() * this.upperCaseString.length)
+            ]
+          );
+        if (this.hasSymbol && password.length < this.length)
+          password.push(
+            this.symbolString[
+              Math.floor(Math.random() * this.symbolString.length)
+            ]
+          );
+      }
+    else return "Check at least one inclusion.";
+    return this.shufflePassword(password.join(""));
   }
 
   shufflePassword(password) {
-    let chars = password.split('');
+    let chars = password.split("");
 
-    // Use Fisher-Yates (Knuth) shuffle algorithm to shuffle the array
+    // Fisher-Yates (Knuth) shuffle algorithm to shuffle the array
     for (let i = chars.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       let temp = chars[i];
@@ -108,7 +54,7 @@ export class Password {
       chars[j] = temp;
     }
 
-    let shuffledString = chars.join('');
+    let shuffledString = chars.join("");
 
     return shuffledString;
   }
